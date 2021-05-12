@@ -11,8 +11,10 @@ const getRandomNumber = () => {
   console.log(`El número aleatorio es: ${randomNumber}`);
 };
 
+getRandomNumber();
+
 const checkNumber = () => {
-  //Crear div
+  //Crear div para añadir el mensaje
   let div = document.createElement("div");
   div.classList.add("message");
   const form = document.querySelector(".form");
@@ -32,18 +34,24 @@ const checkNumber = () => {
   }
 };
 
-const handlerClickButton = () => {
+let acc = 0;
+const addCounter = () => {
+  let p = document.createElement("p");
+  p.classList.add("counter__message");
+  const form = document.querySelector(".form");
+  form.appendChild(p);
+
+  acc += 1;
   const arrayNumbers = [];
   arrayNumbers.push(inputNumber.value);
 
-  console.log(arrayNumbers);
-
-  checkNumber();
+  p.innerHTML = `Número de intentos ${acc}`;
 };
 
-//Declarar funciones
-
-getRandomNumber();
+const handlerClickButton = () => {
+  addCounter();
+  checkNumber();
+};
 
 //Eventos
 
