@@ -1,8 +1,7 @@
 //Constantes
 
 const buttonSubmit = document.querySelector(".js-button");
-const inputNumber = document.querySelector(".js-input");
-const inputNumberValue = inputNumber.value; //aquí no entiendo por qué no me pilla esta variable
+const inputNumber = document.querySelector(".js-inputNumber");
 const randomNumber = Math.ceil(Math.random() * 100);
 
 //Funciones
@@ -10,42 +9,45 @@ const randomNumber = Math.ceil(Math.random() * 100);
 const getRandomNumber = () => {
   console.log(`El número aleatorio es: ${randomNumber}`);
 };
-
 getRandomNumber();
 
 const checkNumber = () => {
   //Crear div para añadir el mensaje
-  let div = document.createElement("div");
-  div.classList.add("message");
+  let p = document.createElement("p");
+  p.classList.add("message");
   const form = document.querySelector(".form");
 
   //Añadir el div al formulario
-  form.appendChild(div);
+  form.appendChild(p);
 
   //Validar
-  if (inputNumber.value === "") {
-    div.innerHTML = "El número debe estar entre 1 y 100";
+  if (!inputNumber.value || inputNumber.value > 100) {
+    p.innerHTML = "El número debe estar entre 1 y 100";
   } else if (inputNumber.value > randomNumber) {
-    div.innerHTML = "Demasiado alto";
+    p.innerHTML = "Demasiado alto";
   } else if (inputNumber.value < randomNumber) {
-    div.innerHTML = "Demasiado bajo";
+    p.innerHTML = "Demasiado bajo";
   } else {
-    div.innerHTML = `¡Has acertado!`;
+    p.innerHTML = `¡Has acertado!`;
   }
 };
 
-let acc = 0;
-const addCounter = () => {
+const counterMessage = () => {
   let p = document.createElement("p");
   p.classList.add("counter__message");
   const form = document.querySelector(".form");
   form.appendChild(p);
 
+  p.innerHTML = `Número de intentos ${acc}`;
+};
+
+let acc = 0;
+const addCounter = () => {
   acc += 1;
   const arrayNumbers = [];
   arrayNumbers.push(inputNumber.value);
 
-  p.innerHTML = `Número de intentos ${acc}`;
+  counterMessage();
 };
 
 const handlerClickButton = () => {
